@@ -1,0 +1,1 @@
+- Whenever you consider delegating implementation work to subagents, prefer `runner` for simple scoped tasks and `general` for heavier multi-step work. `explore` is essentially free — use it for read-only discovery.

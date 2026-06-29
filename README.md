@@ -9,7 +9,7 @@ Three primary agents (`lite`, `standard`, `pro`) share the same workflow prompt 
 - **Superpowers plugin** — brainstorming, planning, TDD, subagent-driven development
 - **Tiered primaries** — `lite` (mimo), `standard` (minimax m3), `pro` (gpt-5.5)
 - **Custom subagents** — `runner`, `review`, tuned `explore`
-- **Custom commands** — `/commit`, `/tell`, `/list`
+- **Custom commands** — `/commit`
 - **Workflow overrides** — no worktrees by default, end-only review, post-plan test coverage audit
 
 ## Install
@@ -67,8 +67,6 @@ opencode
 - **Default** — `lite`
 - **`@review`** — final consolidated code review
 - **`@runner`** — cheap implementation subagent
-- **`/tell`** — message a background subagent
-- **`/list`** — list active background subagents
 
 ## Structure
 

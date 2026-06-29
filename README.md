@@ -24,7 +24,7 @@ source ~/.zshrc
 ### Local / from clone
 
 ```bash
-git clone <your-repo-url> ~/dev/privat/supercode
+git clone git@github.com:hmSchuller/supercode.git ~/dev/privat/supercode
 cd ~/dev/privat/supercode
 chmod +x install.sh
 ./install.sh
@@ -36,7 +36,7 @@ source ~/.zshrc
 ### Manual
 
 ```bash
-git clone <your-repo-url> ~/.config/supercode
+git clone git@github.com:hmSchuller/supercode.git ~/.config/supercode
 
 # add to ~/.zshrc:
 export OPENCODE_CONFIG="$HOME/.config/supercode/opencode.jsonc"

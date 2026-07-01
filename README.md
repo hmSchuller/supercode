@@ -2,7 +2,12 @@
 
 An opinionated [OpenCode](https://opencode.ai) profile built around [Superpowers](https://github.com/obra/superpowers).
 
-Three primary agents (`lite`, `standard`, `pro`) share the same workflow prompt but use different models. Built-in `build` and `plan` agents are disabled.
+Three primary agents (`lite`, `standard`, `pro`) share the same workflow prompt but use different models. Built-in `build` and `plan` agents are disabled. Supercode is meant to provide a preconfigured workflow that allows you to do serious development work at a fraction of the costs of the higher end frontier subscriptions.
+
+Needed subscriptions:
+- `opencode-go` (lite, standard, explore, runner) - 10$ / month
+- `ChatGPT Plus` (pro) - 20$ / month
+- `Brave Search` (optional, for web search) - 5000 queries / month free after registering
 
 ## Features
 
@@ -31,6 +36,19 @@ I've found it to be very helpful. It works by checking the staged changes and ge
 - Worktrees: In theory nice, often times unnecessary. When you need them, tell the agent to use them.
 - Review: Superpower's default review cycle is very thorough. I found it to be overkill for most tasks. Skipping the review cycle between tasks and doing a consolidated review at the end proved to have the same level of quality but with a lower wall time.
 - Test coverage audit: Spawning a dedicated subagent to audit the test coverage after the plan has been created proved to be very helpful. It helps you catch missing edge cases and ensures that you have a good test coverage. This is done while you review the plan anyway.
+
+### Using other models
+You can switch to other models by editing the `opencode.jsonc` file. The models are configured in the `agent` section, or using the `/model` command. Good substitutes for `lite` are `deepseek-v4-flash`. They're prolly equally capable, I have found `mimo-v2.5` to be better at following instructions.
+For `standard`, `minimax-m3` is one hell of a model. You can also use `mimo-v2.5-pro` or `deepseek-v4-pro` here, but I have found `minimax-m3` to be more reliable and cost effective.
+For `pro`, you can switch to `gpt-5.4` if you want to get more mileage out of your usage limits. It's stated that `gpt-5.5` is more expensive but token efficient. Honestly, I am rarely using `pro` so I couldn't tell much of a difference. 
+
+**What about `glm-5.2`?** Honestly, I do not see a usecase for `glm-5.2` in this workflow. I've found `minimax-m3` to be equally performant, while costing a fraction. In cases where `minimax-m3` is not enough, `glm-5.2` wasn't any better.
+
+**By sticking to the suggested models for `lite` and `standard`, you will have a hard time reaching your usage limits.**
+
+## Getting the most out of your `pro` limit
+Use `pro` for features where you are architecturally completely lost and need to figure out the best way to implement it. If you a tackling a completely novel problem, you should use `pro` to get a sense of the best way to approach it
+Once a spec and implementation plan has been created, you can switch to a cheaper agent to implement it. `standard` is capable to handle any implementation task.
 
 
 ## Install

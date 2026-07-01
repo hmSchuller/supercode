@@ -12,6 +12,27 @@ Three primary agents (`lite`, `standard`, `pro`) share the same workflow prompt 
 - **Custom commands** — `/commit`
 - **Workflow overrides** — no worktrees by default, end-only review, post-plan test coverage audit
 
+## Common Questions
+
+### Why is the plan agent disabled?
+By using superpowers, naturally describing tasks is enough to trigger the `brainstorming` skill which will start a spec driven planning process. 
+
+### What's the difference between the primary agents?
+The more powerful the agent, the more capable it is handling the tasks you throw at it.
+
+- `lite` is the default agent and uses the `mimo-v2.5` model. It's dirt cheap. There's no way you will ever run into usage limits with this one.
+- `standard` uses the `minimax-m3` model. It's more powerful than `lite` and very cost efficient. I recommend using this one for most more complex tasks. It's not set as default because escalating up is usually the more cost effective way to go.
+- `pro` uses the `gpt-5.5` model. Needless to say, it wipes the floor with the other two, but you will quickly drain your usage limits with this one. Expect 2 - 3 feature per 5 hour usage window. 
+
+### Why is there a custom commit command?
+I've found it to be very helpful. It works by checking the staged changes and generating a commit for it. You can invoke this during any point in your session, with any primary agent as it always spawns a cheap subagent to do the work.
+
+### What's the reasoning for tweaking superpowers' default settings?
+- Worktrees: In theory nice, often times unnecessary. When you need them, tell the agent to use them.
+- Review: Superpower's default review cycle is very thorough. I found it to be overkill for most tasks. Skipping the review cycle between tasks and doing a consolidated review at the end proved to have the same level of quality but with a lower wall time.
+- Test coverage audit: Spawning a dedicated subagent to audit the test coverage after the plan has been created proved to be very helpful. It helps you catch missing edge cases and ensures that you have a good test coverage. This is done while you review the plan anyway.
+
+
 ## Install
 
 ### One-liner

@@ -14,21 +14,21 @@
     "lite": {
       "mode": "primary",
       "description": "Fast default — mimo v2.5",
-      "prompt": "{file:./prompts/primary.txt}",
+      "prompt": "{file:./prompts/agents/primary.txt}",
       "model": "opencode-go/mimo-v2.5",
       "variant": "high"
     },
     "standard": {
       "mode": "primary",
       "description": "Balanced — minimax m3",
-      "prompt": "{file:./prompts/primary.txt}",
+      "prompt": "{file:./prompts/agents/primary.txt}",
       "model": "opencode-go/minimax-m3",
       "variant": "thinking"
     },
     "pro": {
       "mode": "primary",
       "description": "Most capable — gpt-5.5",
-      "prompt": "{file:./prompts/primary.txt}",
+      "prompt": "{file:./prompts/agents/primary.txt}",
       "model": "openai/gpt-5.5",
       "variant": "medium"
     },
@@ -48,8 +48,10 @@
   },
   "command": {
     "commit": {
-      "template": "",
-      "model": "opencode-go/mimo-v2.5"
+      "description": "Writes a commit message for the staged changes",
+      "template": "{file:./prompts/command/commit.txt}",
+      "agent": "runner",
+      "subtask": true
     }
   },
   "plugin": ["superpowers@git+https://github.com/obra/superpowers.git"]

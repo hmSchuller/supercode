@@ -1,13 +1,8 @@
----
-description: Generate a commit message from staged changes and commit
-subtask: true
----
-
-First, run `git diff --cached` to see what is staged. Then run `git diff --cached --stat` to see the file summary.
+First, run `git diff --cached` to see what is staged. Then run `git diff --cached --stat` to see the file summary. Then run `git log -5 --format='%s'` to read the subject lines of the last 5 commits.
 
 Based on the staged changes, write a well-formed git commit message following these rules:
 
-1. **Subject line**: 50-72 chars, imperative mood ("add feature" not "added feature"), no period at end. check previous commit messages and align with the existing wording style
+1. **Subject line**: 50-72 chars, imperative mood ("add feature" not "added feature"), no period at end. Match the wording style of the last 5 commit subjects (e.g. verb choice, scope prefix, capitalization, tense)
 2. **Blank line** after subject
 3. **Body**: wrapped at 72 chars, explaining *what* changed and *why* (not how). Include relevant context, motivation, and any important details
 

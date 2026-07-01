@@ -20,7 +20,7 @@ Search the web using the [Brave Search API](https://brave.com/search/api/).
 export BRAVE_API_KEY="YOUR_API_KEY"
 ```
 
-Add it to your shell profile (`~/.zshrc`, `~/.bashrc`) or opencode's config env.
+Add it to your shell profile (`~/.zshrc`, `~/.bashrc`) or before running `supercode`.
 
 ## Usage
 

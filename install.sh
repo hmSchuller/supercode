@@ -68,17 +68,54 @@ fi
 
 SHELL_RC="$(pick_shell_rc)"
 
-if ! grep -q "$MARKER" "$SHELL_RC" 2>/dev/null; then
-  cat >>"$SHELL_RC" <<EOF
-
-$MARKER
-export OPENCODE_CONFIG="\$HOME/.config/supercode/opencode.jsonc"
-export OPENCODE_CONFIG_DIR="\$HOME/.config/supercode"
+add_supercode_function() {
+  cat <<'EOF'
+supercode() {
+  OPENCODE_CONFIG="$HOME/.config/supercode/opencode.jsonc" \
+  OPENCODE_CONFIG_DIR="$HOME/.config/supercode" \
+  command opencode "$@"
+}
 EOF
-  echo "Added env vars to $SHELL_RC"
-else
-  echo "Shell profile already configured ($SHELL_RC)"
-fi
+}
+
+configure_shell_rc() {
+  local rc="$1"
+
+  if grep -q "supercode()" "$rc" 2>/dev/null; then
+    echo "Shell profile already configured ($rc)"
+    return
+  fi
+
+  if grep -q "$MARKER" "$rc" 2>/dev/null; then
+    local tmp inserted=0
+    tmp="$(mktemp)"
+    while IFS= read -r line || [[ -n "$line" ]]; do
+      if [[ "$line" == 'export OPENCODE_CONFIG="$HOME/.config/supercode/opencode.jsonc"' ]]; then
+        continue
+      fi
+      if [[ "$line" == 'export OPENCODE_CONFIG_DIR="$HOME/.config/supercode"' ]]; then
+        continue
+      fi
+      echo "$line" >>"$tmp"
+      if [[ "$line" == "$MARKER" && "$inserted" -eq 0 ]]; then
+        add_supercode_function >>"$tmp"
+        inserted=1
+      fi
+    done <"$rc"
+    mv "$tmp" "$rc"
+    echo "Upgraded shell profile in $rc"
+    return
+  fi
+
+  {
+    echo ""
+    echo "$MARKER"
+    add_supercode_function
+  } >>"$rc"
+  echo "Added supercode command to $rc"
+}
+
+configure_shell_rc "$SHELL_RC"
 
 cat <<EOF
 
@@ -87,8 +124,8 @@ Supercode installed.
 Next steps:
   1. source "$SHELL_RC"
   2. Copy .env.example values into your shell profile if needed
-  3. opencode auth
-  4. opencode
+  3. supercode auth
+  4. supercode
 
 To update later:
   cd "$DIR" && git pull

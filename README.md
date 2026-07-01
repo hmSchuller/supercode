@@ -7,8 +7,8 @@ Three primary agents (`lite`, `standard`, `pro`) share the same workflow prompt 
 Two paid subscriptions are required — deliberately. Only this combination provides the right mix of usage limits, models for every level of complexity, and zero-day data retention for serious software development.
 
 Needed subscriptions:
-- `opencode-go` (lite, standard, explore, runner) — $10/month, via `opencode auth`
-- `ChatGPT Plus` (pro) — $20/month, linked through `opencode auth` (OpenAI provider; no API key)
+- `opencode-go` (lite, standard, explore, runner) — $10/month, via `supercode auth`
+- `ChatGPT Plus` (pro) — $20/month, linked through `supercode auth` (OpenAI provider; no API key)
 
 Optional subscriptions:
 - **FREE:** `Brave Search` (web search skill) — 2000 queries / month
@@ -73,7 +73,7 @@ chmod +x install.sh
 source ~/.zshrc
 ```
 
-`./install.sh` copies the profile to `~/.config/supercode` and adds env vars to your shell.
+`./install.sh` copies the profile to `~/.config/supercode` and adds the `supercode` command to your shell.
 
 ### Manual
 
@@ -81,18 +81,21 @@ source ~/.zshrc
 git clone git@github.com:hmSchuller/supercode.git ~/.config/supercode
 
 # add to ~/.zshrc:
-export OPENCODE_CONFIG="$HOME/.config/supercode/opencode.jsonc"
-export OPENCODE_CONFIG_DIR="$HOME/.config/supercode"
+supercode() {
+  OPENCODE_CONFIG="$HOME/.config/supercode/opencode.jsonc" \
+  OPENCODE_CONFIG_DIR="$HOME/.config/supercode" \
+  command opencode "$@"
+}
 ```
 
 ## Prerequisites
 
 - [OpenCode](https://opencode.ai) installed
 - Auth for `opencode-go` (lite, standard, explore, runner)
-- A [ChatGPT Plus](https://chatgpt.com) subscription for the `pro` agent — link it via `opencode auth` (OpenAI provider). No API key or pay-as-you-go billing required.
+- A [ChatGPT Plus](https://chatgpt.com) subscription for the `pro` agent — link it via `supercode auth` (OpenAI provider). No API key or pay-as-you-go billing required.
 
 ```bash
-opencode auth
+supercode auth
 ```
 
 ## Environment variables
@@ -102,7 +105,7 @@ See [`.env.example`](.env.example). Optional: `BRAVE_API_KEY` for the bundled we
 ## Usage
 
 ```bash
-opencode
+supercode
 ```
 
 - **Tab** — cycle primary agents (`lite` → `standard` → `pro`)

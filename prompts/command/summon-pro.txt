@@ -1,0 +1,14 @@
+The user wants pro-level help with:
+
+$ARGUMENTS
+
+You stay the primary agent. Do not switch agents and do not do this work yourself.
+
+1. Interpret $ARGUMENTS in light of the conversation so far (files, plans, bugs, constraints).
+2. Spawn a `pro` subagent via the Task tool with a self-contained prompt that includes:
+   - The specific task and expected deliverable
+   - Relevant context the subagent cannot see from your history (paths, decisions, errors, open questions)
+   - Any scope limits (read-only vs implement, files to touch, what to skip)
+3. When the subagent returns, give the user a short summary and say how it affects ongoing work.
+
+If $ARGUMENTS is empty, ask what they want the pro agent to focus on before spawning.
